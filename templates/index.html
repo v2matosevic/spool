@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="local-token" content="{{ token }}">
+  <meta name="color-scheme" content="dark light">
+  <title>Spool</title>
+  <link rel="icon" href="/static/logo.png">
+  <link rel="preload" href="/static/fonts/mona-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/app.css">
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#FF7A2F"/><circle cx="28" cy="32" r="19" fill="#14110E"/><rect x="28" y="44" width="27" height="7" fill="#14110E"/><circle cx="28" cy="32" r="4.2" fill="#FF7A2F"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></symbol>
+    <symbol id="i-drag" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18m-9-9-3 3m3-3 3 3m-3 15-3-3m3 3 3-3M3 12l3-3m-3 3 3 3m15-3-3-3m3 3-3 3"/></symbol>
+    <symbol id="i-library" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.5 5.4 3.5 8.5s-1.1 5.9-3.5 8.5c-2.4-2.6-3.5-5.4-3.5-8.5s1.1-5.9 3.5-8.5z"/></symbol>
+    <symbol id="i-agent" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="m7.5 10 2.5 2-2.5 2M12.5 14.5h4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7.5h8.5M17.5 7.5H20M4 16.5h2.5M11.5 16.5H20"/><circle cx="15" cy="7.5" r="2.4"/><circle cx="9" cy="16.5" r="2.4"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h3.7l2 2h7.3a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-paste" viewBox="0 0 24 24"><rect x="5.5" y="5" width="13" height="15.5" rx="2.2"/><path d="M9 5V4.2c0-.7.5-1.2 1.2-1.2h3.6c.7 0 1.2.5 1.2 1.2V5M9 11h6M9 14.5h4"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11m0-11-11 11"/></symbol>
+    <symbol id="i-retry" viewBox="0 0 24 24"><path d="M4.8 12.5a7.3 7.3 0 1 0 2.4-6M4.8 4.5v3.9h3.9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5.5M12 16.3v.2"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.7v.2"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 17.5V6.2l10-2v11.3"/><circle cx="6.6" cy="17.5" r="2.4"/><circle cx="16.6" cy="15.5" r="2.4"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3.5" y="6" width="12" height="12" rx="2.2"/><path d="m15.5 10.5 5-3v9l-5-3"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 8.5V6.7a2.2 2.2 0 0 0-2.2-2.2H6.7a2.2 2.2 0 0 0-2.2 2.2v6.6a2.2 2.2 0 0 0 2.2 2.2h1.8"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-open" viewBox="0 0 24 24"><path d="M13.5 4.5h6v6M19.5 4.5l-8 8M17.5 14v4a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 18V8A1.5 1.5 0 0 1 6 6.5h4"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 19 6v5.5c0 4.3-2.9 7.5-7 9-4.1-1.5-7-4.7-7-9V6z"/><path d="m9 12 2.2 2.2L15.2 10"/></symbol>
+    <symbol id="i-captions" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="M10.5 10.2a2 2 0 1 0 0 3.6M17 10.2a2 2 0 1 0 0 3.6"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="12" r="3.8"/><path d="M11.8 12h8.7M17.5 12v3M20.5 12v2.2"/></symbol>
+  </svg>
+
+  <div class="app">
+    <aside class="rail">
+      <a class="brand" href="/" aria-label="Spool home"><svg class="brand-mark" aria-hidden="true"><use href="#mark"/></svg><span class="wordmark">Spool</span></a>
+      <nav class="nav" aria-label="Main">
+        <button class="nav-item active" data-view="download" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Download</span><span class="nav-meta"><span class="reel-spin" id="nav-active" hidden aria-hidden="true"></span><span class="badge badge-alert" id="nav-attention" hidden></span></span></button>
+        <button class="nav-item" data-view="library"><svg class="icon" aria-hidden="true"><use href="#i-library"/></svg><span>Library</span><span class="nav-meta"><span class="nav-count" id="library-count">0</span></span></button>
+        <button class="nav-item" data-view="platforms"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg><span>Sources</span></button>
+        <button class="nav-item" data-view="agents"><svg class="icon" aria-hidden="true"><use href="#i-agent"/></svg><span>Agents</span></button>
+        <button class="nav-item" data-view="settings"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></button>
+      </nav>
+      <div class="rail-foot">
+        <p class="local-status" id="local-status"><span class="dot" aria-hidden="true"></span><span id="local-status-text">Connecting…</span></p>
+        <p class="rail-note">Runs on this computer. Files, history and sign-ins stay here.</p>
+        <p class="rail-version" id="engine-version"></p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h2 class="topbar-title" id="view-title">Download</h2>
+        <div class="topbar-actions">
+          <button class="dest" type="button" data-view="settings" data-focus="folder-path" title="Change where new downloads are saved"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><span class="dest-path" id="save-folder">Downloads folder</span></button>
+          <button class="btn btn-quiet" id="open-folder" type="button"><svg class="icon" aria-hidden="true"><use href="#i-open"/></svg>Open folder</button>
+        </div>
+      </header>
+      <div class="banners">
+        <div id="connection-error" class="banner banner-error" role="alert" hidden><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span>Lost the connection to Spool. Open the app again to restart it; this page reconnects on its own.</span></div>
+        <div id="dependency-error" class="banner banner-error" role="alert" hidden></div>
+      </div>
+
+      <section id="view-download" class="view">
+        <div class="view-head">
+          <h1>Paste a link. Keep the original.</h1>
+          <p>Video or song from YouTube, TikTok, X, Instagram, Spotify and many more sites, saved on this computer at the best quality the source offers.</p>
+        </div>
+
+        <form id="download-form" class="composer" novalidate>
+          <div class="drop" id="drop">
+            <label class="sr-only" for="urls">Video or Spotify song links, one per line</label>
+            <textarea id="urls" rows="2" placeholder="Paste a link, or a batch of links, one per line" spellcheck="false" autocomplete="off"></textarea>
+            <div class="drop-foot">
+              <p class="link-summary" id="link-summary"><span class="muted">Ctrl+V anywhere in the window, or drop links here.</span></p>
+              <button type="button" class="btn btn-quiet btn-sm" id="paste"><svg class="icon" aria-hidden="true"><use href="#i-paste"/></svg>Paste</button>
+            </div>
+          </div>
+          <p id="spotify-hint" class="note note-music" hidden><svg class="icon" aria-hidden="true"><use href="#i-music"/></svg><span>Spotify identifies the song; the audio comes from a matching YouTube recording, tagged with Spotify's details and cover art. Video formats save as MP3. Albums and playlists aren't supported.</span></p>
+
+          <div class="controls">
+            <label class="field" for="mode"><span class="field-label">Format</span>
+              <select id="mode"><optgroup label="Video"><option value="original">Original · best quality</option><option value="mp4">MP4 · plays everywhere</option><option value="mp4-best">MP4 · highest source quality</option><option value="mkv">MKV · highest source quality</option><option value="webm">WebM</option></optgroup><optgroup label="Audio only"><option value="audio">Original audio</option><option value="mp3">MP3</option><option value="m4a">M4A · AAC</option><option value="flac">FLAC · lossless container</option><option value="wav">WAV · uncompressed</option></optgroup></select>
+            </label>
+            <label class="field" for="quality" id="quality-field"><span class="field-label">Resolution</span>
+              <select id="quality"><option value="best">Best available</option><option value="2160">Up to 4K · 2160p</option><option value="1440">Up to 1440p</option><option value="1080">Up to 1080p</option><option value="720">Up to 720p</option><option value="480">Up to 480p</option></select>
+            </label>
+            <label class="field" for="browser"><span class="field-label">Sign-in</span>
+              <select id="browser"><option value="none">None · public link</option><option value="brave">Brave session</option><option value="chrome">Chrome session</option><option value="edge">Edge session</option><option value="firefox">Firefox session</option><option value="cookies">Imported cookies.txt</option></select>
+            </label>
+          </div>
+          <p id="mode-hint" class="hint"></p>
+
+          <details class="batch-location">
+            <summary>Folder for this batch</summary>
+            <label class="sr-only" for="batch-folder">Folder for this batch</label>
+            <div class="folder-form"><input id="batch-folder" class="input" spellcheck="false" placeholder="Use the default download folder"><button class="btn btn-secondary" type="button" id="browse-batch-folder" disabled title="Available in the desktop app">Browse…</button><button class="btn btn-quiet" type="button" id="reset-batch-folder">Reset</button></div>
+            <p class="hint">Applies to this batch only. Leave blank to use your default folder.</p>
+          </details>
+
+          <div class="toggles">
+            <label class="toggle" title="Uses original playback streams, including TikTok's, and skips sources the engine marks as watermarked. It can't detect logos that are part of the original upload."><input id="clean" type="checkbox" checked><span class="switch" aria-hidden="true"></span><span>Skip watermarked sources</span></label>
+            <label class="toggle" id="subtitles-field" title="Saves English and Croatian subtitle files next to the video when the source has them."><input id="subtitles" type="checkbox"><span class="switch" aria-hidden="true"></span><span>Save subtitles</span></label>
+            <label class="toggle" title="Save every file directly in the chosen folder. Unique filenames keep downloads separate."><input id="flat-folder" type="checkbox"><span class="switch" aria-hidden="true"></span><span>Save all in one folder</span></label>
+          </div>
+
+          <div id="form-error" class="alert" role="alert" hidden></div>
+          <div id="preview" class="preview" hidden></div>
+
+          <div class="composer-foot">
+            <p class="kbd-hint"><kbd>Ctrl</kbd><kbd>Enter</kbd> to download</p>
+            <div class="composer-actions">
+              <button class="btn btn-secondary" type="button" id="preview-button"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg><span>Preview</span></button>
+              <button class="btn btn-primary" type="submit" id="download-button"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Download</span></button>
+            </div>
+          </div>
+        </form>
+
+        <section class="activity" aria-labelledby="activity-title">
+          <div class="section-head"><h2 id="activity-title">Activity</h2><span class="section-note" id="queue-note"></span></div>
+          <div class="group" id="group-active" hidden>
+            <div class="group-head"><h3>In progress <span class="count" id="count-active">0</span></h3></div>
+            <div class="job-list" id="list-active" aria-live="polite"></div>
+          </div>
+          <div class="group" id="group-attention" hidden>
+            <div class="group-head"><h3>Needs attention <span class="count count-alert" id="count-attention">0</span></h3><div class="group-actions"><button class="btn btn-quiet btn-sm" type="button" id="retry-failed"><svg class="icon" aria-hidden="true"><use href="#i-retry"/></svg>Retry failed</button><button class="btn btn-quiet btn-sm" type="button" id="clear-attention"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Clear</button></div></div>
+            <div class="job-list" id="list-attention"></div>
+          </div>
+          <div class="group" id="group-recent" hidden>
+            <div class="group-head"><h3>Recently saved</h3><div class="group-actions"><button class="btn btn-quiet btn-sm" type="button" data-view="library">Library<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            <div class="job-list" id="list-recent"></div>
+          </div>
+          <div class="empty" id="activity-empty" hidden>
+            <svg class="empty-mark" aria-hidden="true"><use href="#mark"/></svg>
+            <h3>Nothing on the spool yet</h3>
+            <p>Paste a link above. Downloads run one at a time in the background and keep going when you close the window.</p>
+          </div>
+        </section>
+      </section>
+
+      <section id="view-library" class="view" hidden>
+        <div class="view-head view-head-row">
+          <div><h1>Library</h1><p id="library-summary">Finished downloads, newest first.</p><p class="hint" id="file-drag-hint">Drag a saved file into another app, or use Copy path.</p></div>
+          <button class="btn btn-quiet btn-sm" type="button" id="clear-library" hidden>Clear list</button>
+        </div>
+        <div class="toolbar">
+          <div class="search"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><label class="sr-only" for="search">Search your library</label><input id="search" type="search" placeholder="Search titles, channels, sites" autocomplete="off"><kbd>/</kbd></div>
+          <div class="segmented" role="group" aria-label="Show">
+            <button type="button" class="segment active" data-kind="all" aria-pressed="true">All</button>
+            <button type="button" class="segment" data-kind="video" aria-pressed="false">Video</button>
+            <button type="button" class="segment" data-kind="audio" aria-pressed="false">Audio</button>
+          </div>
+          <label class="sr-only" for="sort">Sort</label>
+          <select id="sort" class="select-compact"><option value="newest">Newest</option><option value="oldest">Oldest</option><option value="largest">Largest</option><option value="title">Title A–Z</option></select>
+        </div>
+        <div id="library" class="library-grid"></div>
+        <div id="library-empty" class="empty" hidden></div>
+      </section>
+
+      <section id="view-platforms" class="view" hidden>
+        <div class="view-head"><h1>Sources</h1><p id="platform-count">The sites your installed engine knows how to read.</p></div>
+        <div id="featured-platforms" class="source-grid"></div>
+        <div class="search search-wide"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><label class="sr-only" for="platform-search">Search supported sites</label><input id="platform-search" type="search" placeholder="Search sites and extractors" autocomplete="off"></div>
+        <div id="platform-results" class="extractor-list"></div>
+        <p class="fineprint">Listed sites have an extractor in the installed engine; that isn't a promise every link works. Login-only posts may need a browser session. Paste individual video or audio links; profiles, playlists and live broadcasts are excluded.</p>
+      </section>
+
+      <section id="view-agents" class="view" hidden>
+        <div class="view-head"><h1>Agents</h1><p>Claude Code, Codex and other MCP-compatible agents on this computer can queue and check downloads. Everything lands in the same queue and library you see here.</p></div>
+        <section class="panel">
+          <div class="panel-head"><div><h2>Connect over MCP</h2><p>Add this entry to your agent's MCP configuration. It starts the local connector when the agent needs it.</p></div><button class="btn btn-secondary btn-sm" type="button" data-copy="mcp-config"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button></div>
+          <pre class="code" id="mcp-config">Loading local configuration…</pre>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><div><h2>Command line</h2><p>The desktop executable takes commands and answers in JSON, with job IDs, progress and finished file paths.</p></div><button class="btn btn-secondary btn-sm" type="button" data-copy="cli-examples"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button></div>
+          <pre class="code" id="cli-examples">VideoDownloader.exe --cli download "VIDEO_URL" --format mp4 --wait
+VideoDownloader.exe --cli status
+VideoDownloader.exe --cli retry-failed
+VideoDownloader.exe --cli platforms bluesky</pre>
+          <p class="fineprint">Formats: original, mp4, mp4-best, mkv, webm, audio, mp3, m4a, flac, wav. Add <code>--folder "D:\Downloads\Research"</code> to send one batch somewhere else.</p>
+        </section>
+        <section class="panel">
+          <h2>What agents can do</h2>
+          <p>Inspect links, queue downloads, follow progress, fetch file paths, retry, cancel, tidy the history and change the default folder. Access stays on this computer behind a local credential, and browser sign-ins stay opt-in per download. Your agent's own permission rules still apply; the connector doesn't call an AI model or need a subscription.</p>
+        </section>
+      </section>
+
+      <section id="view-settings" class="view" hidden>
+        <div class="view-head"><h1>Settings</h1><p>Stored on this computer.</p></div>
+        <section class="panel" id="diagnostic-panel">
+          <h2>Diagnostics</h2>
+          <p>Download attempts, app errors and agent requests are recorded locally. Credentials and full source links are removed. Job history links each failure to its details.</p>
+          <p id="diagnostic-status" class="status-text">Checking diagnostics…</p>
+          <div class="file-row"><button class="btn btn-secondary" type="button" id="view-diagnostics">View recent logs</button><button class="btn btn-secondary" type="button" id="export-diagnostics">Save diagnostic report</button></div>
+          <p class="fineprint">App and agent events are kept for up to 30 days, within a storage limit. Early-startup logs use a separate size limit. Nothing is uploaded; review a report before sharing it.</p>
+          <p id="diagnostic-summary" class="fineprint" role="status"></p>
+          <pre id="diagnostic-output" class="diagnostic-output" tabindex="0" hidden></pre>
+        </section>
+        <section class="panel">
+          <h2>Download folder</h2>
+          <p>New downloads go here. Choose Save all in one folder when downloading to skip separate subfolders. Files you already have stay where they are.</p>
+          <form id="folder-form" class="folder-form"><label class="sr-only" for="folder-path">Download folder path</label><input id="folder-path" class="input" required spellcheck="false"><button class="btn btn-secondary" type="button" id="browse-folder" disabled title="Available in the desktop app">Browse…</button><button class="btn btn-primary" type="submit">Save</button></form>
+          <p id="disk-space" class="fineprint"></p>
+        </section>
+        <section class="panel">
+          <h2>Posts that need a login</h2>
+          <p>Pick a browser session under Sign-in when you download. The engine reads that browser's cookies locally; no password is asked for. If Windows blocks browser cookies, import a cookies.txt export from your own session instead.</p>
+          <div class="file-row"><label class="btn btn-secondary file-button" for="cookie-file"><svg class="icon" aria-hidden="true"><use href="#i-key"/></svg>Import cookies.txt</label><input id="cookie-file" class="sr-only" type="file" accept=".txt"><span id="cookie-status" class="status-text">No cookie file imported</span></div>
+          <p class="fineprint">The file stays in this app's local folder. Treat it like a password, and only choose a session for sites you want Spool to read.</p>
+        </section>
+        <section class="panel">
+          <h2>Download engine</h2>
+          <div id="engine-status" class="pills"></div>
+          <p>Platforms change often. From source, run <code>Update engine.cmd</code> and restart the app. The packaged app updates with a new build. Your library and settings are stored separately and survive both.</p>
+        </section>
+        <section class="panel">
+          <h2>Spotify songs</h2>
+          <p id="spotify-status" class="status-text">Checking the song matcher…</p>
+          <p>Paste a Spotify track link, or several. Spotify supplies artist, album and cover; spotDL finds a matching YouTube recording, and that recording sets the audio quality. Preview shows the match before you download. FLAC or WAV can't restore detail the source never had.</p>
+          <p class="fineprint">Public tracks need no Spotify login or developer key. Matching is automatic and can occasionally pick another version, so check Preview when the exact recording matters.</p>
+        </section>
+        <section class="panel">
+          <h2>Quality and clean sources</h2>
+          <p>Original keeps the best available video and audio without re-encoding. MP4 · plays everywhere picks H.264 video with AAC audio, which can mean a lower resolution. Original audio avoids a lossy conversion; MP3 trades a little fidelity for compatibility. Nothing is ever upscaled.</p>
+          <p>Skip watermarked sources rejects formats explicitly marked as watermarked, such as TikTok's download copies. It doesn't crop, blur or reconstruct video. Profiles, playlists and live streams are excluded; paste individual links instead.</p>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="drop-overlay" id="drop-overlay" aria-hidden="true"><div><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Drop links to add them</span></div></div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+</body>
+</html>

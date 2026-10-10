@@ -1,0 +1,19 @@
+# Matching-only spotDL dependencies. setup_spotify.py installs the unchanged
+# spotdl 4.5.2 library with --no-deps; spotify_worker blocks its CLI/web import.
+# Do not add the obsolete FastAPI/Starlette/anyio web stack to this helper.
+beautifulsoup4==4.15.0
+mutagen==1.48.1
+platformdirs==4.12.4
+pydantic==2.14.0
+pykakasi==2.3.0
+python-slugify[unidecode]==8.0.4
+RapidFuzz==3.14.6
+requests==2.34.2
+rich==13.9.4
+soundcloud-v2==1.7.0
+spotipy==2.26.0
+spotipyFree==1.9.14
+syncedlyrics==1.0.1
+yt-dlp[default]==2026.8.19
+ytmusicapi==1.12.3
+PyInstaller==6.22.3

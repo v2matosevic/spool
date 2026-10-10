@@ -1,0 +1,22 @@
+name: Bug report
+description: Report a reproducible problem without private links or credentials.
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Spool version and operating system
+      placeholder: 1.5.0, Windows 11 x64
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected result and actual result
+      description: Include selected format. Use only a public sample you can share. Never paste cookies, connection.json or signed media URLs.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe diagnostic evidence
+      description: Inspect any redacted report before attaching it. Reference IDs and error text usually suffice.
