@@ -5,10 +5,26 @@ from pathlib import Path
 import platform
 import subprocess
 import sys
+import time
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from runtime import VERSION
+
+
+def verify_disk_image(path):
+    for attempt in range(3):
+        try:
+            result=subprocess.run(['hdiutil','verify',str(path)],check=True,capture_output=True,text=True)
+        except subprocess.CalledProcessError as error:
+            detail=(error.stdout or '')+(error.stderr or '')
+            if 'Resource temporarily unavailable' not in detail or attempt==2:
+                raise
+            print('Disk image is temporarily busy; retrying verification.',flush=True)
+            time.sleep(2*(attempt+1))
+        else:
+            print(result.stdout,end='')
+            return
 
 
 def main():
@@ -67,7 +83,7 @@ def main():
             plist=plistlib.load(handle)
         assert plist['CFBundleShortVersionString']==VERSION
         subprocess.run(['codesign','--verify','--deep','--strict',str(app)],check=True)
-        subprocess.run(['hdiutil','verify',str(ROOT/f'dist/Spool-{VERSION}-macos-{platform.machine()}.dmg')],check=True)
+        verify_disk_image(ROOT/f'dist/Spool-{VERSION}-macos-{platform.machine()}.dmg')
         dependencies=subprocess.check_output(['otool','-L',diagnostic['tools']['ffmpeg']],text=True)
         assert all(line.strip().startswith(('/usr/lib/','/System/Library/')) for line in dependencies.splitlines()[1:]),'Non-system FFmpeg dependency'
     output={'version':VERSION,'platform':sys.platform,'architecture':platform.machine(),'diagnostics':'passed',
