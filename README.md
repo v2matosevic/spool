@@ -5,14 +5,14 @@
 A local video and audio downloader for Windows and macOS. Save source-quality media, manage a persistent queue, and use the same library from the desktop app, a JSON command line or an MCP agent.
 
 [![Tests](https://github.com/v2matosevic/spool/actions/workflows/ci.yml/badge.svg)](https://github.com/v2matosevic/spool/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/v2matosevic/spool)](https://github.com/v2matosevic/spool/releases/latest)
+[![Downloads](https://img.shields.io/badge/downloads-GitHub_Releases-blue)](https://github.com/v2matosevic/spool/releases)
 [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE)
 
 **No hosted backend, telemetry, required account or paid API.** Media extraction and downloads contact the source platforms. History, cookies, settings and diagnostic reports stay on your computer.
 
 ## Download
 
-[Get the latest release](https://github.com/v2matosevic/spool/releases/latest). Choose the file for your computer; a source archive is not a prebuilt app.
+Published desktop builds appear on [GitHub Releases](https://github.com/v2matosevic/spool/releases) after all release checks pass. If that page has no release, use the source setup below; CI artifacts are test candidates. Choose the file for your computer; a source archive is not a prebuilt app.
 
 | Computer | Release file | How to open |
 | --- | --- | --- |

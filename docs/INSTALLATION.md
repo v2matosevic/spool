@@ -1,6 +1,6 @@
 # Install Spool
 
-Use the [latest GitHub release](https://github.com/v2matosevic/spool/releases/latest). Choose your OS and architecture. Check the release's verification notes before treating a build as a native UI test.
+Use a published build from [GitHub Releases](https://github.com/v2matosevic/spool/releases). If no release is listed yet, use the source instructions in the README; CI artifacts are test candidates. Choose your OS and architecture. Check the release's verification notes before treating a build as a native UI test.
 
 ## Windows 10/11 x64
 
