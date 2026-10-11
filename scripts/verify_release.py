@@ -38,12 +38,24 @@ def main():
         assert float(result['format']['duration'])>=.9
     report=json.loads(subprocess.check_output([str(executable),'--cli','diagnostics'],env=environment,text=True))
     assert 'events' in report
-    requests=[{'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-06-18','capabilities':{},'clientInfo':{'name':'release-check','version':'1'}}},
-              {'jsonrpc':'2.0','method':'notifications/initialized'},
-              {'jsonrpc':'2.0','id':2,'method':'tools/list','params':{}}]
-    process=subprocess.run([str(executable),'--mcp'],input=''.join(json.dumps(r)+'\n' for r in requests),capture_output=True,text=True,env=environment,check=True)
-    replies=[json.loads(line) for line in process.stdout.splitlines() if line.strip()]
-    tools=next(r['result']['tools'] for r in replies if r.get('id')==2)
+    process=subprocess.Popen([str(executable),'--mcp'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,env=environment)
+    def request(identifier,method,params):
+        process.stdin.write(json.dumps({'jsonrpc':'2.0','id':identifier,'method':method,'params':params})+'\n')
+        process.stdin.flush()
+        while True:
+            line=process.stdout.readline()
+            if not line:raise RuntimeError('Packaged MCP stream closed before response '+str(identifier))
+            reply=json.loads(line)
+            if reply.get('id')==identifier:
+                if 'error' in reply:raise RuntimeError('MCP rejected '+method+': '+str(reply['error']['code']))
+                return reply['result']
+    initialization=request(1,'initialize',{'protocolVersion':'2025-06-18','capabilities':{},'clientInfo':{'name':'release-check','version':'1'}})
+    assert initialization['protocolVersion']
+    process.stdin.write(json.dumps({'jsonrpc':'2.0','method':'notifications/initialized'})+'\n')
+    process.stdin.flush()
+    tools=request(2,'tools/list',{})['tools']
+    process.stdin.close()
+    assert process.wait()==0
     assert len(tools)==13 and {'download_videos','get_diagnostics'}<={t['name'] for t in tools}
     if sys.platform=='darwin':
         import plistlib
