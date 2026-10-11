@@ -44,7 +44,10 @@ def main():
         process.stdin.flush()
         while True:
             line=process.stdout.readline()
-            if not line:raise RuntimeError('Packaged MCP stream closed before response '+str(identifier))
+            if not line:
+                import diagnostics as diag
+                detail=diag.redact(process.stderr.read()[-6000:])
+                raise RuntimeError('Packaged MCP stream closed before response '+str(identifier)+': '+detail)
             reply=json.loads(line)
             if reply.get('id')==identifier:
                 if 'error' in reply:raise RuntimeError('MCP rejected '+method+': '+str(reply['error']['code']))
