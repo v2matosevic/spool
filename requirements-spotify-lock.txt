@@ -37,7 +37,7 @@ readerwriterlock==1.0.9
 redis==8.1.0
 requests==2.34.2
 rich==13.9.4
-setuptools==84.0.0
+setuptools==84.1.0
 six==1.17.0
 soundcloud-v2==1.7.0
 soupsieve==3.0.1
