@@ -40,7 +40,7 @@ rich==13.9.4
 setuptools==84.0.0
 six==1.17.0
 soundcloud-v2==1.7.0
-soupsieve==3.0.1
+soupsieve==4.0
 spotapi==1.2.8
 spotdl==4.5.2
 spotipy==2.26.0
