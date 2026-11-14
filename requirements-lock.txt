@@ -27,7 +27,7 @@ MarkupSafe==3.0.4
 mcp==2.3.0
 mcp-types==2.3.0
 mutagen==1.48.1
-opentelemetry-api==1.45.1
+opentelemetry-api==1.45.2
 packaging==26.3
 pefile==2024.8.26
 pillow==12.3.0
